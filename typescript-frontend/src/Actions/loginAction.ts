@@ -6,7 +6,13 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8000";
 
-export function SignUpUser(user: any) {
+export function SignUpUser(user: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobileNo: string;
+  password: string;
+}) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/signup`;
@@ -25,7 +31,7 @@ export function SignUpUser(user: any) {
   };
 }
 
-export function loginUser(user: any) {
+export function loginUser(user: { email: string; password: string }) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/login`;
@@ -48,7 +54,7 @@ export function loginUser(user: any) {
   };
 }
 
-export function loginUserWithGoogle(data: any) {
+export function loginUserWithGoogle(data: { credential: string }) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/login/google`;
@@ -72,7 +78,7 @@ export function loginUserWithGoogle(data: any) {
   };
 }
 
-export function signUpUserWithGoogle(data: any) {
+export function signUpUserWithGoogle(data: { credential: string }) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/signupwithGoogle`;

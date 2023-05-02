@@ -6,7 +6,11 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 const baseUrl = process.env.REACT_APP_BASE_URL || "http://localhost:8000";
 
-export function forgotPassword(user: any) {
+export function forgotPassword(
+  user:
+    | { isContact: boolean; contact: string }
+    | { isContact: boolean; email: string }
+) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/forgot-password`;
@@ -28,7 +32,11 @@ export function forgotPassword(user: any) {
   };
 }
 
-export function sendOtpForCheck(data: any) {
+export function sendOtpForCheck(data: {
+  parameter: string | null;
+  otp: string;
+  isContact: boolean;
+}) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/check-otp/${data.parameter}/${data.otp}/${data.isContact}`;
@@ -55,7 +63,12 @@ export function sendOtpForCheck(data: any) {
   };
 }
 
-export function resetPassword(data: any) {
+export function resetPassword(data: {
+  email: string | null;
+  contact: string | null;
+  password: string;
+  isContact: boolean;
+}) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/reset-password`;
@@ -77,7 +90,11 @@ export function resetPassword(data: any) {
   };
 }
 
-export function removeOtp(data: any) {
+export function removeOtp(
+  data:
+    | { isContact: boolean; contact: string | null }
+    | { isContact: boolean; email: string | null }
+) {
   return async (dispatch: Dispatch) => {
     try {
       const url = `${baseUrl}/remove-otp`;
