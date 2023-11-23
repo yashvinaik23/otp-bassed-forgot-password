@@ -103,7 +103,6 @@ const loginUserWithGoogle = async (req, res) => {
       version: "v2",
     });
     const raw_data = await oauth2.userinfo.get();
-    console.log(raw_data);
 
     const user = await UserModal.findByEmail(raw_data.data.email);
     if (!user) {
